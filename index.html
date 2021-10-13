@@ -1,110 +1,47 @@
+<!DOCTYPE html>
 <html>
-
 <head>
-
-  <title>AI DJ WEB APP</title>
-  <link href="https://fonts.googleapis.com/css2?family=Architects+Daughter&family=Gluten:wght@414&display=swap"
-    rel="stylesheet">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+	<title>AI DJ WEB APP</title>
+  <link href="https://fonts.googleapis.com/css2?family=Architects+Daughter&family=Gluten:wght@414&display=swap" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
 
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.0.0/p5.js"></script>
 
   <script src="https://unpkg.com/ml5@0.4.3/dist/ml5.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.0/addons/p5.sound.min.js"></script>
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.0/addons/p5.sound.min.js"></script>  
   <link rel="stylesheet" type="text/css" href="style.css">
 
 </head>
-<style>
-  canvas {
+<body >
+<center>
+  	<h3 class="header">AI DJ WEB APP
+	    <br>
+	    <span class="header1">NOTE - Move your left-hand wrist up and down for increasing and decreasing the volume. 
+        Move your right-hand wrist up and down for increasing and decreasing the speed</span>
+  	</h3>
+	<br><br>
+  <div class="speed">
+    <img class="speed-img"  src="disk.gif">  
+    <br>
+    <h3 class="btn btn-success" id="speed" >Speed</h3>
+  </div>
+  <div class="volume">
+    <img  class="volume-img" src="disk.gif">
+    <br>
+    <h3 id="volumename" class="btn btn-success">Volume</h3>
+ 
+  </div>
+ 
 
-    border: 5px solid black;
-    border-radius: 10px;
-    box-shadow: 5px 5px 5px rgb(39, 39, 39);
+  <br>
+  <br>
+  <button class="btn btn-danger Play" onclick="PLAY()">PLAY</button>
+</center>
 
-  }
-</style>
-
-<body
-  background="https://media.istockphoto.com/vectors/musical-vector-background-music-accessories-seamless-pattern-vector-id621608876">
-  <center>
-    <h2
-      style="width: 100%; height: 10%; margin: 0px; font-size: 15px; background-position: center; background-size: cover;"
-      class="btn btn-warning">AI DJ <span class="header1">NOTE - Move your left-hand wrist up and down for increasing
-        and decreasing the volume.
-        Move your right-hand wrist up and down for increasing and decreasing the speed</span></h2>
-    <br>
-    <br>
-    <br>
-    <button class="btn btn-success" onclick="Play()">Play</button>
-    <br>
-    <H4 class="btn btn-warning">Volume: <span class="btn btn-success volume"></span></H4>
-    <br>
-    <H4 class="btn btn-warning">Speed: <span class="btn btn-success speed"></span></H4>
-
-  </center>
+<script src="main.js"></script>
 </body>
-<!-- From here the main.js will work -->
-
-
-
-
-
-
-
-
-
-<script>
-   song="";
-  leftWristx=0;
-  leftWristy=0;
-  
-  rightWristx=0;
-  rightWristy=0;
-
-
-  function preload() {
-     song=loadSound("music.mp3");
-
-  }
-
-  function setup() {
-    canvas = createCanvas(400, 300);
-    canvas.position(480,250);
-    video= createCapture(VIDEO);
-    video.hide();
-
-    poseNet=poseNet(video , modelloaded);
-    poseNet.on("pose", gotresult);
-  }
-
-  function draw() {
-    image(video,0,0,400,300);
-
-
-  }
-
-
-  function Play(){
-    song.play();
-    song.setVolume(1);
-    song.rate(1);
-  }
-
-  function modelloaded(){
-    console.log("modelis loaded");
-      }
-
-      function gotresult(rusult){
-      if(rusult.length > 0){
-        console.log(rusult);
-        leftWristx=rusult[0].pose.leftWrist.x;
-        leftWristy=rusult[0].pose.leftWrist.y;
-      }
-      }
-</script>
-
 </html>
